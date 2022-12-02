@@ -168,7 +168,6 @@ public var NSCoderReadCorruptError: Int                      { return CocoaError
 
 public var NSCoderValueNotFoundError: Int                    { return CocoaError.Code.coderValueNotFound.rawValue }
 
-#if !os(WASI)
 internal func _NSErrorWithErrno(_ posixErrno : Int32, reading : Bool, path : String? = nil, url : URL? = nil, extraUserInfo : [String : Any]? = nil) -> NSError {
     var cocoaError : CocoaError.Code
     if reading {
@@ -206,7 +205,6 @@ internal func _NSErrorWithErrno(_ posixErrno : Int32, reading : Bool, path : Str
     
     return NSError(domain: NSCocoaErrorDomain, code: cocoaError.rawValue, userInfo: userInfo)
 }
-#endif
 
 #if os(Windows)
 // The codes in this domain are codes returned by GetLastError in the Windows SDK (in WinError.h):

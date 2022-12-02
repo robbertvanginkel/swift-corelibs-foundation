@@ -331,7 +331,6 @@ extension String {
 
     //===--- Initializers that can fail -------------------------------------===//
 
-#if !os(WASI)
     // - (instancetype)
     //     initWithContentsOfFile:(NSString *)path
     //     encoding:(NSStringEncoding)enc
@@ -413,7 +412,6 @@ extension String {
         let ns = try NSString(contentsOf: url, usedEncoding: nil)
         self = String._unconditionallyBridgeFromObjectiveC(ns)
     }
-#endif
 
     // - (instancetype)
     //     initWithCString:(const char *)nullTerminatedCString

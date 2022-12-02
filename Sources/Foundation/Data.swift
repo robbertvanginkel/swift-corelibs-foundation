@@ -2030,7 +2030,6 @@ public struct Data : ReferenceConvertible, Equatable, Hashable, RandomAccessColl
         }
     }
     
-#if !os(WASI)
     /// Initialize a `Data` with the contents of a `URL`.
     ///
     /// - parameter url: The `URL` to read.
@@ -2043,7 +2042,6 @@ public struct Data : ReferenceConvertible, Equatable, Hashable, RandomAccessColl
             return Data(bytes: d.bytes, count: d.length)
         }
     }
-#endif
     
     /// Initialize a `Data` from a Base-64 encoded String using the given options.
     ///

@@ -1373,7 +1373,6 @@ extension NSString {
         }
     }
 
-#if !os(WASI)
     public convenience init(contentsOf url: URL, encoding enc: UInt) throws {
         let readResult = try NSData(contentsOf: url, options: [])
 
@@ -1461,7 +1460,6 @@ extension NSString {
     public convenience init(contentsOfFile path: String, usedEncoding enc: UnsafeMutablePointer<UInt>?) throws {
         try self.init(contentsOf: URL(fileURLWithPath: path), usedEncoding: enc)
     }
-#endif
 }
 
 extension NSString : ExpressibleByStringLiteral { }

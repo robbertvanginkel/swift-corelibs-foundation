@@ -151,7 +151,6 @@ open class NSData : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
         _init(bytes: bytes, length: length, copy: false, deallocator: deallocator)
     }
 
-#if !os(WASI)
     /// Initializes a data object with the contents of the file at a given path.
     public init(contentsOfFile path: String, options readOptionsMask: ReadingOptions = []) throws {
         super.init()
@@ -174,7 +173,6 @@ open class NSData : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
             return nil
         }
     }
-#endif
 
     /// Initializes a data object with the contents of another data object.
     public init(data: Data) {
@@ -184,7 +182,6 @@ open class NSData : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
         }
     }
 
-#if !os(WASI)
     /// Initializes a data object with the data from the location specified by a given URL.
     public init(contentsOf url: URL, options readOptionsMask: ReadingOptions = []) throws {
         super.init()
@@ -217,7 +214,6 @@ open class NSData : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
             return try _NSNonfileURLContentLoader.current.contentsOf(url: url)
         }
     }
-#endif
 
     /// Initializes a data object with the given Base64 encoded string.
     public init?(base64Encoded base64String: String, options: Base64DecodingOptions = []) {
@@ -433,7 +429,6 @@ open class NSData : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
         }
     }
 
-#if !os(WASI)
     internal static func readBytesFromFileWithExtendedAttributes(_ path: String, options: ReadingOptions) throws -> NSDataReadResult {
         guard let handle = FileHandle(path: path, flags: O_RDONLY, createMode: 0) else {
             throw NSError(domain: NSPOSIXErrorDomain, code: Int(errno), userInfo: nil)
@@ -443,6 +438,7 @@ open class NSData : NSObject, NSCopying, NSMutableCopying, NSSecureCoding {
     }
 
 
+#if !os(WASI)
     /// Writes the data object's bytes to the file specified by a given path.
     open func write(toFile path: String, options writeOptionsMask: WritingOptions = []) throws {
 
@@ -1004,7 +1000,6 @@ open class NSMutableData : NSData {
         super.init(data: data)
     }
 
-#if !os(WASI)
     public override init?(contentsOfFile path: String) {
         super.init(contentsOfFile: path)
     }
@@ -1020,7 +1015,6 @@ open class NSMutableData : NSData {
     public override init(contentsOf url: URL, options: NSData.ReadingOptions = []) throws {
         try super.init(contentsOf: url, options: options)
     }
-#endif
 
     public override init?(base64Encoded base64Data: Data, options: NSData.Base64DecodingOptions = []) {
         super.init(base64Encoded: base64Data, options: options)
